@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>2021 Movies</title>
+        <style type="text/css">
+            body {
+                font-family: sans-serif;
+                font-size: 18px;
+                padding: 50px;
+                background-color: #ddd;
+            }
+
+            .content {
+                background-color: #fff;
+                padding: 40px;
+                box-shadow: 10px 10px #bbb;
+            }
+
+            th {
+                background-color: #555;
+                color: #fff;
+                font-size: 22px
+            }
+
+            .numeric-data {
+                text-align: center;
+            }
+
+            h1, h2 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <h1>2021 in Letterboxd movies</h1>
+            <h2>{{ user }} collection</h2>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Movie</th>
+                    <th>Rating</th>
+                </tr>
+                {% for movie in movies %}<tr>
+                    <td class="numeric-data">{{ movie.idx }}</td>
+                    <td>{{ movie.name }}</td>
+                    <td class="numeric-data">{{ movie.rating }}</td>
+                </tr>{% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
