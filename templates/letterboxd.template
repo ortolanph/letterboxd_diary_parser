@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>2021 Movies</title>
+        <link rel="stylesheet" href="letterboxd.css"/>
+    </head>
+    <body>
+        <div class="content">
+            <h1 id="main">2021 in Letterboxd movies</h1>
+
+            <h2>Table of Contents</h2>
+            <ol>
+                <li><a href="#general_info">General Information</a></li>
+                <li><a href="#movies_watched">Movies Watched</a></li>
+            </ol>
+
+            <h2 id="general_info">General Information</h2>
+            <table>
+                <tr>
+                    <th>Movies Watched</th>
+                    <th>Rewatches</th>
+                    <th>Ratings Average</th>
+                </tr>
+                <tr>
+                    <td class="numeric-data">{{ watched }}</td>
+                    <td class="numeric-data">{{ rewatches }}</td>
+                    <td class="numeric-data">{{ average }}</td>
+                </tr>
+            </table>
+
+            <h2 id="movies_watched">Movies Watched</h2>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Movie</th>
+                    <th>Rating</th>
+                </tr>
+                {% for movie in movies %}<tr>
+                    <td class="numeric-data">{{ movie.idx }}</td>
+                    <td>{{ movie.name }}</td>
+                    <td class="numeric-data">{{ movie.rating }}</td>
+                </tr>{% endfor %}
+            </table>
+            <a href="#main">Back to top</a>
+        </div>
+    </body>
+</html>

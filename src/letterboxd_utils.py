@@ -35,13 +35,6 @@ def create_table(title, header, values):
     print()
 
 
-def create_numeric_info(title, info):
-    print(title)
-    print("------------------")
-    print(info)
-    print()
-
-
 def identity_transformer(data):
     return data
 
