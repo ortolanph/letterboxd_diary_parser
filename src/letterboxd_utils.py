@@ -35,6 +35,15 @@ def create_table(title, header, values):
     print()
 
 
+def to_sinple_movie(entry):
+    return {
+        "name": entry.name,
+        "rating": entry.rating,
+        "watched": entry.watched_date.strftime('%Y-%m-%d'),
+        "review_link": entry.uri
+    }
+
+
 def identity_transformer(data):
     return data
 

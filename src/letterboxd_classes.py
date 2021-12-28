@@ -4,7 +4,7 @@ import datetime
 from src.letterboxd_aggregators import same_rating, contains_tag, same_year, same_review_time, same_review_month, \
     same_watched_month
 from src.letterboxd_utils import parse_date, parse_tags, is_rewatch, calculate_review_time, identity_transformer, \
-    to_month_transformer
+    to_month_transformer, to_sinple_movie
 
 
 class LetterBoxdDiary:
@@ -110,5 +110,8 @@ class LetterBoxdDiaryStatistics:
     def avg_ratings(self):
         return round(self.sum_ratings() / self.count_movies(), 2)
 
-    def make_movie_report(self):
-        pass
+    def create_movie_table(self):
+        sorted_movies = self.__diary_entries
+        sorted_movies.sort(key=lambda e: e.watched_date)
+
+        return map(to_sinple_movie, sorted_movies)

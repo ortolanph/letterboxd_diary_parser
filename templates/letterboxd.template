@@ -28,17 +28,18 @@
                     <td class="numeric-data">{{ average }}</td>
                 </tr>
             </table>
+            <a href="#main">Back to top</a>
 
             <h2 id="movies_watched">Movies Watched</h2>
             <table>
                 <tr>
-                    <th>#</th>
+                    <th>Watched Date</th>
                     <th>Movie</th>
                     <th>Rating</th>
                 </tr>
                 {% for movie in movies %}<tr>
-                    <td class="numeric-data">{{ movie.idx }}</td>
-                    <td>{{ movie.name }}</td>
+                    <td class="numeric-data">{{ movie.watched }}</td>
+                    <td><a href="{{ movie.review_link }}" target="_blank">{{ movie.name }}</a></td>
                     <td class="numeric-data">{{ movie.rating }}</td>
                 </tr>{% endfor %}
             </table>
