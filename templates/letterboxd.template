@@ -2,17 +2,23 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>2021 Movies</title>
+        <title>{{ year }} Movies</title>
         <link rel="stylesheet" href="letterboxd.css"/>
     </head>
     <body>
         <div class="content">
-            <h1 id="main">2021 in Letterboxd movies</h1>
+            <h1 id="main">{{ year }} in Letterboxd movies</h1>
 
             <h2>Table of Contents</h2>
             <ol>
                 <li><a href="#general_info">General Information</a></li>
                 <li><a href="#movies_watched">Movies Watched</a></li>
+                <li>
+                    <a href="#graphics">Graphics</a>
+                    <ol>
+                        {% for graph in graphs %}<li><a href="#{{ graph.id }}">{{ graph.title}}</a></li>{% endfor %}
+                    </ol>
+                </li>
             </ol>
 
             <h2 id="general_info">General Information</h2>
@@ -44,6 +50,18 @@
                 </tr>{% endfor %}
             </table>
             <a href="#main">Back to top</a>
+
+            <h2 id="graphics">Graphics</h2>
+
+            {% for graph in graphs %}<h3 id="{{ graph.id }}">{{ graph.title }}</h3>
+            <p style="text-align: center">
+                <img src="{{ graph.file }}"/>
+            </p>
+            <a href="#main">Back to top</a>
+            {% endfor %}
+
+            <br/>
+            <p style="text-align:center; font-size: 12px">Developed by Paulo Ortolan</p>
         </div>
     </body>
 </html>

@@ -26,13 +26,14 @@ def is_rewatch(rewatch_flag):
             return False
 
 
-def create_table(title, header, values):
-    print(title)
-    print("------------------")
-    print(header)
-    for key in values:
-        print(f"{key},{values[key]}")
-    print()
+def create_graph_data(data_dict, need_sorting):
+    if need_sorting:
+        data_dict = dict(sorted(data_dict.items()))
+
+    return {
+        "data": list(data_dict.values()),
+        "labels": list(data_dict.keys())
+    }
 
 
 def to_sinple_movie(entry):
