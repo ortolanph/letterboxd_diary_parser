@@ -40,13 +40,13 @@
             <table>
                 <tr>
                     <th>Watched Date</th>
-                    <th>Movie</th>
                     <th>Rating</th>
+                    <th>Movie</th>
                 </tr>
                 {% for movie in movies %}<tr>
                     <td class="numeric-data">{{ movie.watched }}</td>
-                    <td><a href="{{ movie.review_link }}" target="_blank">{{ movie.name }}</a></td>
                     <td class="numeric-data">{{ movie.rating }}</td>
+                    <td><a href="{{ movie.review_link }}" target="_blank">{{ movie.name }}</a></td>
                 </tr>{% endfor %}
             </table>
             <a href="#main">Back to top</a>
@@ -61,7 +61,7 @@
             {% endfor %}
 
             <br/>
-            <p style="text-align:center; font-size: 12px">Developed by Paulo Ortolan</p>
+            <p style="text-align:center; font-size: 12px">Developed by <a href="https://github.com/ortolanph">Paulo Ortolan</a></p>
         </div>
     </body>
 </html>

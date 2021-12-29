@@ -15,7 +15,8 @@ GRAPH_DICT = {
             "ylabel": "Number of Movies",
             "xlabel": "Ratings",
             "filename": "ratings.png",
-            "width": 6.4
+            "width": 6.4,
+            "height": 5
         }
     },
     "TAGS": {
@@ -28,7 +29,8 @@ GRAPH_DICT = {
             "ylabel": "Number of Movies",
             "xlabel": "Tags",
             "filename": "tags.png",
-            "width": 6.4
+            "width": 9,
+            "height": 7
         }
     },
     "YEAR": {
@@ -41,7 +43,8 @@ GRAPH_DICT = {
             "ylabel": "Number of Movies",
             "xlabel": "Years",
             "filename": "years.png",
-            "width": 17
+            "width": 17,
+            "height": 6.4
         }
     },
     "LAZY_REVIEWS": {
@@ -54,7 +57,8 @@ GRAPH_DICT = {
             "ylabel": "Number of Movies",
             "xlabel": "Days that I took to review",
             "filename": "lazyreviews.png",
-            "width": 10
+            "width": 10,
+            "height": 4.8
         }
     },
     "REVIEWS_MONTH": {
@@ -67,7 +71,8 @@ GRAPH_DICT = {
             "ylabel": "Number of Reviews",
             "xlabel": "Months",
             "filename": "reviews_months.png",
-            "width": 10
+            "width": 10,
+            "height": 6
         }
     },
     "WATCHES_MONTH": {
@@ -80,7 +85,8 @@ GRAPH_DICT = {
             "ylabel": "Number of Watches",
             "xlabel": "Months",
             "filename": "watches_months.png",
-            "width": 10
+            "width": 10,
+            "height": 6
         }
     },
 }
