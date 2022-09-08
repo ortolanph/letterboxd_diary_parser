@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import sys
 
 from src.letterboxd_graphs import generate_graph
@@ -58,4 +59,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    files = os.listdir("src")
+    print(files)
+    # main()
