@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 import sys
 
 from src.letterboxd_graphs import generate_graph
@@ -30,13 +29,13 @@ def main():
         create_graph_data(statistics.movies_by_year(),
                           GRAPH_DICT["YEAR"]["data"]["sort"])
 
-    GRAPH_DICT["LAZY_REVIEWS"]["data"]["statistics"] = \
-        create_graph_data(statistics.lazy_reviews(),
-                          GRAPH_DICT["LAZY_REVIEWS"]["data"]["sort"])
-
-    GRAPH_DICT["REVIEWS_MONTH"]["data"]["statistics"] = \
-        create_graph_data(statistics.reviews_by_month(),
-                          GRAPH_DICT["REVIEWS_MONTH"]["data"]["sort"])
+    # GRAPH_DICT["LAZY_REVIEWS"]["data"]["statistics"] = \
+    #     create_graph_data(statistics.lazy_reviews(),
+    #                       GRAPH_DICT["LAZY_REVIEWS"]["data"]["sort"])
+    #
+    # GRAPH_DICT["REVIEWS_MONTH"]["data"]["statistics"] = \
+    #     create_graph_data(statistics.reviews_by_month(),
+    #                       GRAPH_DICT["REVIEWS_MONTH"]["data"]["sort"])
 
     GRAPH_DICT["WATCHES_MONTH"]["data"]["statistics"] = \
         create_graph_data(statistics.watches_by_month(),
@@ -59,6 +58,6 @@ def main():
 
 
 if __name__ == "__main__":
-    files = os.listdir("src")
-    print(files)
-    # main()
+    # files = os.listdir("src")
+    # print(files)
+    main()
