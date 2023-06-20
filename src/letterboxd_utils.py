@@ -41,7 +41,8 @@ def to_sinple_movie(entry):
         "name": entry.name,
         "rating": entry.rating,
         "watched": entry.watched_date.strftime('%Y-%m-%d'),
-        "review_link": entry.uri
+        "review_link": entry.uri,
+        "tags": entry.tags
     }
 
 
