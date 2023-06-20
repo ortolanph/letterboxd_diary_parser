@@ -40,7 +40,7 @@ class LetterBoxdDiaryStatistics:
 
     __genre_dict = dict()
     __source_dict = dict()
-    __based_dict = dict()
+    __adaptation_dict = dict()
 
     def __init__(self, data_file_name, year):
         self.data_file = data_file_name
@@ -77,10 +77,6 @@ class LetterBoxdDiaryStatistics:
                     self.__populate_source_dict(my_diary_entry.tags)
                     self.__populate_based_on_dict(my_diary_entry.tags)
 
-                    print(self.__genre_dict)
-                    print(self.__source_dict)
-                    print(self.__based_dict)
-
     def __populate_genre_dict(self, tags):
         genre_tags = [tag.split(":")[1] for tag in tags if tag.strip().startswith("genre:")]
 
@@ -100,13 +96,13 @@ class LetterBoxdDiaryStatistics:
                 self.__source_dict[source_tag] = 1
 
     def __populate_based_on_dict(self, tags):
-        based_on_tags = [tag.split(":")[0].strip() for tag in tags if tag.strip().startswith("based")]
+        based_on_tags = [tag.split(":")[1].strip() for tag in tags if tag.strip().startswith("adaptation:")]
 
         for based_on_tag in based_on_tags:
-            if based_on_tag in self.__based_dict:
-                self.__based_dict[based_on_tag] += 1
+            if based_on_tag in self.__adaptation_dict:
+                self.__adaptation_dict[based_on_tag] += 1
             else:
-                self.__based_dict[based_on_tag] = 1
+                self.__adaptation_dict[based_on_tag] = 1
 
     def __get_data(self, data_set, aggregator, transformer):
         result_dict = {}
@@ -154,3 +150,12 @@ class LetterBoxdDiaryStatistics:
         sorted_movies.sort(key=lambda e: e.watched_date)
 
         return map(to_sinple_movie, sorted_movies)
+
+    def genres(self):
+        return self.__genre_dict
+
+    def sources(self):
+        return self.__source_dict
+
+    def adaptations(self):
+        return self.__adaptation_dict

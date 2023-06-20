@@ -28,7 +28,7 @@ Follow these steps in order to export your data:
  * On your Letterboxd account, login 
  * Go to on you user dropdown, and press Settings
  * On settings, press IMPORT & EXPORT
- * Press EXPORT YOUR data button
+ * Press EXPORT YOUR DATA button
 
 ![Export Data](docs/letterboxd_export_data.PNG)
 

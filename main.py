@@ -21,13 +21,13 @@ def main():
         create_graph_data(statistics.movies_by_rating(),
                           GRAPH_DICT["RATINGS"]["data"]["sort"])
 
-    GRAPH_DICT["TAGS"]["data"]["statistics"] = \
-        create_graph_data(statistics.movies_by_tag(),
-                          GRAPH_DICT["TAGS"]["data"]["sort"])
-
-    GRAPH_DICT["YEAR"]["data"]["statistics"] = \
-        create_graph_data(statistics.movies_by_year(),
-                          GRAPH_DICT["YEAR"]["data"]["sort"])
+    # GRAPH_DICT["TAGS"]["data"]["statistics"] = \
+    #     create_graph_data(statistics.movies_by_tag(),
+    #                       GRAPH_DICT["TAGS"]["data"]["sort"])
+    #
+    # GRAPH_DICT["YEAR"]["data"]["statistics"] = \
+    #     create_graph_data(statistics.movies_by_year(),
+    #                       GRAPH_DICT["YEAR"]["data"]["sort"])
 
     # GRAPH_DICT["LAZY_REVIEWS"]["data"]["statistics"] = \
     #     create_graph_data(statistics.lazy_reviews(),
@@ -40,6 +40,18 @@ def main():
     GRAPH_DICT["WATCHES_MONTH"]["data"]["statistics"] = \
         create_graph_data(statistics.watches_by_month(),
                           GRAPH_DICT["WATCHES_MONTH"]["data"]["sort"])
+
+    GRAPH_DICT["WATCHED_GENRES"]["data"]["statistics"] = \
+        create_graph_data(statistics.genres(),
+                          GRAPH_DICT["WATCHED_GENRES"]["data"]["sort"])
+
+    GRAPH_DICT["WATCHED_SOURCES"]["data"]["statistics"] = \
+        create_graph_data(statistics.sources(),
+                          GRAPH_DICT["WATCHED_SOURCES"]["data"]["sort"])
+
+    GRAPH_DICT["WATCHED_ADAPTATIONS"]["data"]["statistics"] = \
+        create_graph_data(statistics.adaptations(),
+                          GRAPH_DICT["WATCHED_ADAPTATIONS"]["data"]["sort"])
 
     prepare_target_folder()
 
