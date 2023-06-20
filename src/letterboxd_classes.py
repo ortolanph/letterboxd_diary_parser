@@ -38,6 +38,10 @@ class LetterBoxdDiaryStatistics:
     __review_months = set()
     __watches_months = set()
 
+    __genre_dict = dict()
+    __source_dict = dict()
+    __based_dict = dict()
+
     def __init__(self, data_file_name, year):
         self.data_file = data_file_name
         self.__read_csv(year)
@@ -68,6 +72,41 @@ class LetterBoxdDiaryStatistics:
                     self.__watches_months.add(my_diary_entry.watched_date.month)
 
                     self.__diary_entries.append(my_diary_entry)
+
+                    self.__populate_genre_dict(my_diary_entry.tags)
+                    self.__populate_source_dict(my_diary_entry.tags)
+                    self.__populate_based_on_dict(my_diary_entry.tags)
+
+                    print(self.__genre_dict)
+                    print(self.__source_dict)
+                    print(self.__based_dict)
+
+    def __populate_genre_dict(self, tags):
+        genre_tags = [tag.split(":")[1] for tag in tags if tag.strip().startswith("genre:")]
+
+        for genre_tag in genre_tags:
+            if genre_tag in self.__genre_dict:
+                self.__genre_dict[genre_tag] += 1
+            else:
+                self.__genre_dict[genre_tag] = 1
+
+    def __populate_source_dict(self, tags):
+        source_tags = [tag.split(":")[1] for tag in tags if tag.strip().startswith("source:")]
+
+        for source_tag in source_tags:
+            if source_tag in self.__source_dict:
+                self.__source_dict[source_tag] += 1
+            else:
+                self.__source_dict[source_tag] = 1
+
+    def __populate_based_on_dict(self, tags):
+        based_on_tags = [tag.split(":")[0].strip() for tag in tags if tag.strip().startswith("based")]
+
+        for based_on_tag in based_on_tags:
+            if based_on_tag in self.__based_dict:
+                self.__based_dict[based_on_tag] += 1
+            else:
+                self.__based_dict[based_on_tag] = 1
 
     def __get_data(self, data_set, aggregator, transformer):
         result_dict = {}

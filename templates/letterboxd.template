@@ -42,11 +42,14 @@
                     <th>Watched Date</th>
                     <th>Rating</th>
                     <th>Movie</th>
+                    <th>Tags</th>
                 </tr>
                 {% for movie in movies %}<tr>
                     <td class="numeric-data">{{ movie.watched }}</td>
                     <td class="numeric-data">{{ movie.rating }}</td>
                     <td><a href="{{ movie.review_link }}" target="_blank">{{ movie.name }}</a></td>
+                    <td>
+                    </td>
                 </tr>{% endfor %}
             </table>
             <a href="#main">Back to top</a>
