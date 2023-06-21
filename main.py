@@ -21,22 +21,6 @@ def main():
         create_graph_data(statistics.movies_by_rating(),
                           GRAPH_DICT["RATINGS"]["data"]["sort"])
 
-    # GRAPH_DICT["TAGS"]["data"]["statistics"] = \
-    #     create_graph_data(statistics.movies_by_tag(),
-    #                       GRAPH_DICT["TAGS"]["data"]["sort"])
-    #
-    # GRAPH_DICT["YEAR"]["data"]["statistics"] = \
-    #     create_graph_data(statistics.movies_by_year(),
-    #                       GRAPH_DICT["YEAR"]["data"]["sort"])
-
-    # GRAPH_DICT["LAZY_REVIEWS"]["data"]["statistics"] = \
-    #     create_graph_data(statistics.lazy_reviews(),
-    #                       GRAPH_DICT["LAZY_REVIEWS"]["data"]["sort"])
-    #
-    # GRAPH_DICT["REVIEWS_MONTH"]["data"]["statistics"] = \
-    #     create_graph_data(statistics.reviews_by_month(),
-    #                       GRAPH_DICT["REVIEWS_MONTH"]["data"]["sort"])
-
     GRAPH_DICT["WATCHES_MONTH"]["data"]["statistics"] = \
         create_graph_data(statistics.watches_by_month(),
                           GRAPH_DICT["WATCHES_MONTH"]["data"]["sort"])

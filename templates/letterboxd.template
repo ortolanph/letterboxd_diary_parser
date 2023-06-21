@@ -50,7 +50,7 @@
                     <td><a href="{{ movie.review_link }}" target="_blank">{{ movie.name }}</a></td>
                     <td>
                         <ul>
-                        {% for tag in movies.tags %}<li>{{ tag }}</li>{% endfor %}
+                        {% for tag in movie.tags %}<li>{{ tag }}</li>{% endfor %}
                         </ul>
                     </td>
                 </tr>{% endfor %}

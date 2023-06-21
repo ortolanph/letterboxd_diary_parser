@@ -116,17 +116,8 @@ class LetterBoxdDiaryStatistics:
     def movies_by_rating(self):
         return self.__get_data(self.__ratings_set, same_rating, identity_transformer)
 
-    def movies_by_tag(self):
-        return self.__get_data(self.__tags_set, contains_tag, identity_transformer)
-
     def movies_by_year(self):
         return self.__get_data(self.__years_set, same_year, identity_transformer)
-
-    def lazy_reviews(self):
-        return self.__get_data(self.__review_times, same_review_time, identity_transformer)
-
-    def reviews_by_month(self):
-        return self.__get_data(self.__review_months, same_review_month, to_month_transformer)
 
     def watches_by_month(self):
         return self.__get_data(self.__watches_months, same_watched_month, to_month_transformer)
