@@ -22,3 +22,22 @@ def generate_graph(statistics, graph_opts):
     plotter.clf()
     plotter.cla()
     plotter.close()
+
+
+def generate_pie_graph(graph_dict):
+    plotter.rcParams['figure.figsize'] = [8, 8]
+
+    plotter.pie(
+        graph_dict["data"],
+        labels=graph_dict["labels"],
+        autopct=lambda x: '{:.0f}'.format(x * sum(graph_dict["data"]) / 100)
+    )
+
+    plotter.title(graph_dict["title"])
+
+    plotter.savefig(fname=f"{TARGET_PATH}{os.sep}{graph_dict['filename']}",
+                    format="png")
+
+    plotter.clf()
+    plotter.cla()
+    plotter.close()

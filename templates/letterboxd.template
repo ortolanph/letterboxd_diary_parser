@@ -12,6 +12,7 @@
             <h2>Table of Contents</h2>
             <ol>
                 <li><a href="#general_info">General Information</a></li>
+                <li><a href="#time_info">Time Information</a></li>
                 <li><a href="#movies_watched">Movies Watched</a></li>
                 <li>
                     <a href="#graphics">Graphics</a>
@@ -29,9 +30,26 @@
                     <th>Ratings Average</th>
                 </tr>
                 <tr>
-                    <td class="numeric-data">{{ watched }}</td>
-                    <td class="numeric-data">{{ rewatches }}</td>
-                    <td class="numeric-data">{{ average }}</td>
+                    <td class="numeric-data"><code>{{ watched }}</code></td>
+                    <td class="numeric-data"><code>{{ rewatches }}</code></td>
+                    <td class="numeric-data"><code>{{ average }}</code></td>
+                </tr>
+            </table>
+
+            <h2 id="time_info">Time Information</h2>
+            <p>{{time_data}}</p>
+            <table>
+                <tr>
+                    <th>Total Movie Time</th>
+                    <th>Longest Movie</th>
+                    <th>Shortest Movie</th>
+                    <th>Movie Time Average</th>
+                </tr>
+                <tr>
+                    <td class="numeric-data"><code>{{ total_time }}</code></td>
+                    <td class="numeric-data"><code>{{ longest_movie_name }}<br/>{{ longest_movie_runtime }}</code></td>
+                    <td class="numeric-data"><code>{{ shortest_movie_name }}<br/>{{ shortest_movie_runtime }}</code></td>
+                    <td class="numeric-data"><code>{{ average_time }}</code></td>
                 </tr>
             </table>
             <a href="#main">Back to top</a>
@@ -42,12 +60,19 @@
                     <th>Watched Date</th>
                     <th>Rating</th>
                     <th>Movie</th>
+                    <th>Runtime</th>
                     <th>Tags</th>
                 </tr>
                 {% for movie in movies %}<tr>
                     <td class="numeric-data">{{ movie.watched }}</td>
                     <td class="numeric-data">{{ movie.rating }}</td>
-                    <td><a href="{{ movie.review_link }}" target="_blank">{{ movie.name }}</a></td>
+                    <td>
+                        {{ movie.name }}<br/>
+                        [<a href="{{ movie.review_link }}" target="_blank">LetterBoxd</a>]&nbsp;
+                        [<a href="http://themoviedb.org/movie/{{ movie.tmdb_id }}" target="_blank">TMDB</a>]&nbsp;
+                        [<a href="http://imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a>]
+                    </td>
+                    <td class="numeric-data">{{ movie.runtime }}</td>
                     <td>
                         <ul>
                         {% for tag in movie.tags %}<li><code>{{ tag }}</code></li>{% endfor %}
@@ -76,6 +101,34 @@
                     <th>Meaning</th>
                 </tr>
                 <tr>
+                    <td><code>theater</code></td>
+                    <td>The movie has been seen on a Movie Theater</td>
+                </tr>
+                <tr>
+                    <td><code>netflix</code></td>
+                    <td>The movie has been seen on Netflix</td>
+                </tr>
+                <tr>
+                    <td><code>disney+</code></td>
+                    <td>The movie has been seen on Disney+</td>
+                </tr>
+                <tr>
+                    <td><code>primevideo</code></td>
+                    <td>The movie has been seen on Amazon Prime Video</td>
+                </tr>
+                <tr>
+                    <td><code>sky</code></td>
+                    <td>The movie has been seen on SkyShowtime</td>
+                </tr>
+                <tr>
+                    <td><code>hbomax</code></td>
+                    <td>The movie has been seen on HBO MAX</td>
+                </tr>
+                <tr>
+                    <td><code>mubi</code></td>
+                    <td>The movie has been seen on MUBI</td>
+                </tr>
+                <tr>
                     <td><code>alternative</code></td>
                     <td>The movie has been seen in an alternative way</td>
                 </tr>
@@ -85,19 +138,48 @@
                 </tr>
                 <tr>
                     <td><code>internet</code></td>
-                    <td>The movie has been seen on its official website different from YouTube</td>
+                    <td>The movie has been seen on its official website, which is different from YouTube</td>
                 </tr>
                 <tr>
                     <td><code>youtube</code></td>
-                    <td>The movie has been seen on youtube</td>
-                </tr>
-                <tr>
-                    <td><code>theater</code></td>
-                    <td>The movie has been seen on theater</td>
+                    <td>The movie has been seen on YouTube, that could be its official site</td>
                 </tr>
             </table>
 
-            <p>My streaming channels include: Netflix (<code>netflix</code>), Disney+ (<code>disney+</code>), Amazon PrimeVideo (<code>primevideo</code>), SkyShowtime (<code>sky</code>), and HBO Max (<code>hbomax</code>).</p>
+            <h3>About Adaptations:</h3>
+            <p>An adaptation is a movie that the original idea came from another media like books, comics, fairy-tales or another source. Here are some adaptations categories:</p>
+
+            <table>
+                <tr>
+                    <th>Adaptation</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td><code>game</code></td>
+                    <td>The movie has been adapted from a Video Game source material</td>
+                </tr>
+                <tr>
+                    <td><code>book</code></td>
+                    <td>The movie has been adapted from a Book source material</td>
+                </tr>
+                <tr>
+                    <td><code>facts</code></td>
+                    <td>The movie has been adapted from Real Facts from newspapers, TV news, radio transmissions or other media</td>
+                </tr>
+                <tr>
+                    <td><code>fairy-tale</code></td>
+                    <td>The movie has been adapted from a Fairy-Tale source material</td>
+                </tr>
+                <tr>
+                    <td><code>comics</code></td>
+                    <td>The movie has been adapted from Comic Books or Graphics Novel source materials</td>
+                </tr>
+                <tr>
+                    <td><code>play</code></td>
+                    <td>The movie has been adapted from a Play source material</td>
+                </tr>
+            </table>
+
             <p style="text-align:center; font-size: 12px">Developed by <a href="https://github.com/ortolanph">Paulo Ortolan</a></p>
         </div>
     </body>

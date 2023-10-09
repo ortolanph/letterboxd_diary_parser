@@ -11,11 +11,6 @@ def parse_tags(my_tags):
     return my_tags.replace('"', '').strip().split(",")
 
 
-def calculate_review_time(date, watched_date):
-    delta = date - watched_date
-    return delta.days
-
-
 def is_rewatch(rewatch_flag):
     if not rewatch_flag:
         return False
@@ -36,13 +31,16 @@ def create_graph_data(data_dict, need_sorting):
     }
 
 
-def to_sinple_movie(entry):
+def to_simple_movie(entry):
     return {
         "name": entry.name,
         "rating": entry.rating,
         "watched": entry.watched_date.strftime('%Y-%m-%d'),
         "review_link": entry.uri,
-        "tags": entry.tags
+        "tags": entry.tags,
+        "runtime": format_duration(entry.runtime),
+        "tmdb_id": entry.tmdb_id,
+        "imdb_id": entry.imdb_id
     }
 
 
@@ -52,3 +50,7 @@ def identity_transformer(data):
 
 def to_month_transformer(data):
     return MONTHS[data - 1]
+
+
+def format_duration(duration):
+    return str(datetime.timedelta(minutes=duration))

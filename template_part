@@ -1,0 +1,16 @@
+            <table>
+                <tr>
+                    <th>Total Movie Time</th>
+                    <th>Longest Movie</th>
+                    <th>Shortest Movie</th>
+                    <th>Movie Time Average</th>
+                </tr>
+                <tr>
+                    <td class="numeric-data"><code>{{ time_data.total_time }}</code></td>
+                    <td class="numeric-data"><code>{{ time_data.longest_movie_name }}<br/>{{ time_data.longest_movie_runtime }}</code></td>
+                    <td class="numeric-data"><code>{{ time_data.shortest_movie_name }}<br/>{{ time_data.shortest_movie_runtime }}</code></td>
+                    <td class="numeric-data"><code>{{ total_time.average_time }}</code></td>
+                </tr>
+            </table>
+            <a href="#main">Back to top</a>
+

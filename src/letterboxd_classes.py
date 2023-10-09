@@ -1,10 +1,10 @@
 import csv
 import datetime
 
-from src.letterboxd_aggregators import same_rating, contains_tag, same_year, same_review_time, same_review_month, \
-    same_watched_month
-from src.letterboxd_utils import parse_date, parse_tags, is_rewatch, calculate_review_time, identity_transformer, \
-    to_month_transformer, to_sinple_movie
+from src.config_manager import ConfigManager
+from src.letterboxd_aggregators import same_watched_month
+from src.letterboxd_utils import parse_date, parse_tags, is_rewatch, to_month_transformer, to_simple_movie
+from src.tmdb_integration import TMDBIntegration
 
 
 class LetterBoxdDiary:
@@ -16,24 +16,32 @@ class LetterBoxdDiary:
     rewatch = False
     tags = []
     watched_date = datetime.date.today()
+    imdb_id = ""
+    tmdb_id = 0
+    runtime = 0
+    poster_path = "" # https://image.tmdb.org/t/p/original/{{poster_path}}
 
     def to_string(self):
-        return f"""Date..........: {self.date}
+        return f"""
+Date..........: {self.date}
 Name..........: {self.name}
 Year..........: {self.year}
 URI...........: {self.uri}
 Rating........: {self.rating}
 Rewatch.......: {self.rewatch}
 Tags..........: {self.tags}
-Watched Date..: {self.watched_date}"""
+Watched Date..: {self.watched_date}
+IMDB ID.......: {self.imdb_id}
+TMDB ID.......: {self.tmdb_id}
+Runtime.......: {self.runtime}
+Poster Path...: {self.poster_path}
+"""
 
 
 class LetterBoxdDiaryStatistics:
     data_file = ""
     __diary_entries = []
-    __ratings_set = set()
     __tags_set = set()
-    __years_set = set()
     __review_times = set()
     __review_months = set()
     __watches_months = set()
@@ -42,8 +50,24 @@ class LetterBoxdDiaryStatistics:
     __source_dict = dict()
     __adaptation_dict = dict()
 
+    __tmdb_integration = None
+
+    __total_time = 0
+    __longest_movie = dict()
+    __longest_movie_runtime = 0
+    __shortest_movie = dict()
+    __shortest_movie_runtime = 9999999
+    __avg_time = 0.0
+    __total_movies_with_runtime = 0
+
     def __init__(self, data_file_name, year):
         self.data_file = data_file_name
+
+        config_manager = ConfigManager()
+        print(f"Configurations: {config_manager.get_tmdb_config()}")
+        self.__tmdb_integration = TMDBIntegration(config_manager.get_tmdb_config())
+        self.__tmdb_integration.authenticate()
+
         self.__read_csv(year)
 
     def __read_csv(self, year):
@@ -51,9 +75,11 @@ class LetterBoxdDiaryStatistics:
             csv_reader = csv.DictReader(data, delimiter=',')
 
             for row in csv_reader:
+                print(f'Movie: {row["Name"]}')
                 watched_year = parse_date(row["Watched Date"]).year
 
                 if int(year) == watched_year:
+                    print(" - Getting information from data source")
                     my_diary_entry = LetterBoxdDiary()
                     my_diary_entry.date = parse_date(row["Date"])
                     my_diary_entry.name = row["Name"]
@@ -63,11 +89,30 @@ class LetterBoxdDiaryStatistics:
                     my_diary_entry.tags = parse_tags(row["Tags"])
                     my_diary_entry.rewatch = is_rewatch(row["Rewatch"])
                     my_diary_entry.watched_date = parse_date(row["Watched Date"])
+                    my_diary_entry.tmdb_id = int(row["TMDB ID"])
 
-                    self.__ratings_set.add(my_diary_entry.rating)
+                    print(" - Fetching other data on TMDB")
+                    if my_diary_entry.tmdb_id > -1:
+                        movie = self.__tmdb_integration.find_movie_by_id(my_diary_entry.tmdb_id)
+                        runtime = int(movie['runtime'])
+                        my_diary_entry.runtime = runtime
+                        self.__total_time += runtime
+
+                        my_diary_entry.imdb_id = movie['imdb_id']
+                        my_diary_entry.poster_path = movie['poster_path']
+
+                        if runtime < self.__shortest_movie_runtime:
+                            self.__shortest_movie = {'movie': my_diary_entry.name, 'runtime': runtime}
+                            self.__shortest_movie_runtime = runtime
+
+                        if runtime > self.__longest_movie_runtime:
+                            self.__longest_movie = {'movie': my_diary_entry.name, 'runtime': runtime}
+                            self.__longest_movie_runtime = runtime
+
+                        self.__total_movies_with_runtime += 1
+
+                    print(" - Separating data")
                     self.__tags_set.update(my_diary_entry.tags)
-                    self.__years_set.add(my_diary_entry.year)
-                    self.__review_times.add(calculate_review_time(my_diary_entry.date, my_diary_entry.watched_date))
                     self.__review_months.add(my_diary_entry.date.month)
                     self.__watches_months.add(my_diary_entry.watched_date.month)
 
@@ -75,7 +120,9 @@ class LetterBoxdDiaryStatistics:
 
                     self.__populate_genre_dict(my_diary_entry.tags)
                     self.__populate_source_dict(my_diary_entry.tags)
-                    self.__populate_based_on_dict(my_diary_entry.tags)
+                    self.__populate_adaptation_dict(my_diary_entry.tags)
+
+        print("Done")
 
     def __populate_genre_dict(self, tags):
         genre_tags = [tag.split(":")[1] for tag in tags if tag.strip().startswith("genre:")]
@@ -95,7 +142,7 @@ class LetterBoxdDiaryStatistics:
             else:
                 self.__source_dict[source_tag] = 1
 
-    def __populate_based_on_dict(self, tags):
+    def __populate_adaptation_dict(self, tags):
         based_on_tags = [tag.split(":")[1].strip() for tag in tags if tag.strip().startswith("adaptation:")]
 
         for based_on_tag in based_on_tags:
@@ -113,11 +160,17 @@ class LetterBoxdDiaryStatistics:
 
         return result_dict
 
-    def movies_by_rating(self):
-        return self.__get_data(self.__ratings_set, same_rating, identity_transformer)
+    def total_time(self):
+        return self.__total_time
 
-    def movies_by_year(self):
-        return self.__get_data(self.__years_set, same_year, identity_transformer)
+    def avg_time(self):
+        return self.total_time() / self.__total_movies_with_runtime
+
+    def longest_movie(self):
+        return self.__longest_movie
+
+    def shortest_movie(self):
+        return self.__shortest_movie
 
     def watches_by_month(self):
         return self.__get_data(self.__watches_months, same_watched_month, to_month_transformer)
@@ -140,7 +193,7 @@ class LetterBoxdDiaryStatistics:
         sorted_movies = self.__diary_entries
         sorted_movies.sort(key=lambda e: e.watched_date)
 
-        return map(to_sinple_movie, sorted_movies)
+        return map(to_simple_movie, sorted_movies)
 
     def genres(self):
         return self.__genre_dict
