@@ -65,7 +65,7 @@
                 </tr>
                 {% for movie in movies %}<tr>
                     <td class="numeric-data">{{ movie.watched }}</td>
-                    <td class="numeric-data">{{ movie.rating }}</td>
+                    <td class="numeric-data">{{ movie.rating }} / 5.0</td>
                     <td>
                         {{ movie.name }}<br/>
                         [<a href="{{ movie.review_link }}" target="_blank">LetterBoxd</a>]&nbsp;
@@ -102,47 +102,51 @@
                 </tr>
                 <tr>
                     <td><code>theater</code></td>
-                    <td>The movie has been seen on a Movie Theater</td>
+                    <td>The movie has been watched on a Movie Theater</td>
                 </tr>
                 <tr>
                     <td><code>netflix</code></td>
-                    <td>The movie has been seen on Netflix</td>
+                    <td>The movie has been watched on Netflix</td>
                 </tr>
                 <tr>
                     <td><code>disney+</code></td>
-                    <td>The movie has been seen on Disney+</td>
+                    <td>The movie has been watched on Disney+</td>
                 </tr>
                 <tr>
                     <td><code>primevideo</code></td>
-                    <td>The movie has been seen on Amazon Prime Video</td>
+                    <td>The movie has been watched on Amazon Prime Video</td>
                 </tr>
                 <tr>
                     <td><code>sky</code></td>
-                    <td>The movie has been seen on SkyShowtime</td>
+                    <td>The movie has been watched on SkyShowtime</td>
                 </tr>
                 <tr>
                     <td><code>hbomax</code></td>
-                    <td>The movie has been seen on HBO MAX</td>
+                    <td>The movie has been watched on HBO MAX</td>
                 </tr>
                 <tr>
                     <td><code>mubi</code></td>
-                    <td>The movie has been seen on MUBI</td>
+                    <td>The movie has been watched on MUBI</td>
+                </tr>
+                <tr>
+                    <td><code>rtpplay</code></td>
+                    <td>The movie has been watched on RTP Play</td>
                 </tr>
                 <tr>
                     <td><code>alternative</code></td>
-                    <td>The movie has been seen in an alternative way</td>
+                    <td>The movie has been watched in an alternative way</td>
                 </tr>
                 <tr>
                     <td><code>tv</code></td>
-                    <td>The movie has been seen on TV</td>
+                    <td>The movie has been watched on TV</td>
                 </tr>
                 <tr>
                     <td><code>internet</code></td>
-                    <td>The movie has been seen on its official website, which is different from YouTube</td>
+                    <td>The movie has been watched on its official website, which is different from YouTube</td>
                 </tr>
                 <tr>
                     <td><code>youtube</code></td>
-                    <td>The movie has been seen on YouTube, that could be its official site</td>
+                    <td>The movie has been watched on YouTube, that could be its official site</td>
                 </tr>
             </table>
 

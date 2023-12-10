@@ -25,6 +25,7 @@ def generate_graph(statistics, graph_opts):
 
 
 def generate_pie_graph(graph_dict):
+    print(f"Generating {graph_dict['title']} graph")
     plotter.rcParams['figure.figsize'] = [8, 8]
 
     plotter.pie(

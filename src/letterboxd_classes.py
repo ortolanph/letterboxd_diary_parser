@@ -19,7 +19,7 @@ class LetterBoxdDiary:
     imdb_id = ""
     tmdb_id = 0
     runtime = 0
-    poster_path = "" # https://image.tmdb.org/t/p/original/{{poster_path}}
+    poster_path = ""  # https://image.tmdb.org/t/p/original/{{poster_path}}
 
     def to_string(self):
         return f"""
@@ -49,6 +49,7 @@ class LetterBoxdDiaryStatistics:
     __genre_dict = dict()
     __source_dict = dict()
     __adaptation_dict = dict()
+    __animation_dict = dict()
 
     __tmdb_integration = None
 
@@ -64,7 +65,6 @@ class LetterBoxdDiaryStatistics:
         self.data_file = data_file_name
 
         config_manager = ConfigManager()
-        print(f"Configurations: {config_manager.get_tmdb_config()}")
         self.__tmdb_integration = TMDBIntegration(config_manager.get_tmdb_config())
         self.__tmdb_integration.authenticate()
 
@@ -121,6 +121,7 @@ class LetterBoxdDiaryStatistics:
                     self.__populate_genre_dict(my_diary_entry.tags)
                     self.__populate_source_dict(my_diary_entry.tags)
                     self.__populate_adaptation_dict(my_diary_entry.tags)
+                    self.__populate_animations_dict(my_diary_entry.tags)
 
         print("Done")
 
@@ -159,6 +160,20 @@ class LetterBoxdDiaryStatistics:
             result_dict[transformer(data_key)] = len(list(movies))
 
         return result_dict
+
+    def __populate_animations_dict(self, tags):
+        if " style:animation" in tags:
+            if "Animation" in self.__animation_dict:
+                self.__animation_dict["Animation"] += 1
+            else:
+                self.__animation_dict["Animation"] = 1
+        else:
+            if "Live Action" in self.__animation_dict:
+                self.__animation_dict["Live Action"] += 1
+            else:
+                self.__animation_dict["Live Action"] = 1
+
+        print(self.__animation_dict)
 
     def total_time(self):
         return self.__total_time
@@ -203,3 +218,6 @@ class LetterBoxdDiaryStatistics:
 
     def adaptations(self):
         return self.__adaptation_dict
+
+    def animations(self):
+        return self.__animation_dict

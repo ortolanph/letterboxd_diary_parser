@@ -32,6 +32,10 @@ def main():
     GRAPH_DICT["WATCHED_ADAPTATIONS"]["data"] = list(sorted_adaptations.values())
     GRAPH_DICT["WATCHED_ADAPTATIONS"]["labels"] = list(sorted_adaptations.keys())
 
+    sorted_animations = dict(sorted(statistics.animations().items(), key=lambda item: item[1]))
+    GRAPH_DICT["ANIMATION_LIVE_ACTION"]["data"] = list(sorted_animations.values())
+    GRAPH_DICT["ANIMATION_LIVE_ACTION"]["labels"] = list(sorted_animations.keys())
+
     time_data = {
         "total_time": format_duration(statistics.total_time()),
         "average_time": format_duration(statistics.avg_time()),
