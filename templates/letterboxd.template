@@ -55,7 +55,11 @@
             <a href="#main">Back to top</a>
 
             <h2 id="movies_watched">Movies Watched</h2>
-            <table>
+            <p></p>
+            <label for="filterMovie">Search a movie</label>
+            <input type="text" id="filterMovie" placeholder="Filter movie...">
+            <p></p>
+            <table id="movieTable">
                 <tr>
                     <th>Watched Date</th>
                     <th>Rating</th>
@@ -186,5 +190,35 @@
 
             <p style="text-align:center; font-size: 12px">Developed by <a href="https://github.com/ortolanph">Paulo Ortolan</a></p>
         </div>
+
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterInput = document.getElementById('filterMovie');
+            const messageTable = document.getElementById('movieTable');
+            const rows = messageTable.getElementsByTagName('tr');
+
+            filterInput.addEventListener('input', function () {
+                const filter = filterInput.value.toLowerCase();
+
+                for (let i = 1; i < rows.length; i++) {
+                    const watchedDate = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+                    const rating = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+                    const movieName = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                    const runtime = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
+                    const tags = rows[i].getElementsByTagName('td')[4].textContent.toLowerCase();
+
+                    if (watchedDate.includes(filter)
+                        || rating.includes(filter)
+                        || movieName.includes(filter)
+                        || runtime.includes(filter)
+                        || tags.includes(filter)) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
     </body>
 </html>
