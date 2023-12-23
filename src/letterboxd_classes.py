@@ -163,17 +163,9 @@ class LetterBoxdDiaryStatistics:
 
     def __populate_animations_dict(self, tags):
         if " style:animation" in tags:
-            if "Animation" in self.__animation_dict:
-                self.__animation_dict["Animation"] += 1
-            else:
-                self.__animation_dict["Animation"] = 1
+            self.__animation_dict["Live Action"] = self.__animation_dict.get("Animation", 0) + 1
         else:
-            if "Live Action" in self.__animation_dict:
-                self.__animation_dict["Live Action"] += 1
-            else:
-                self.__animation_dict["Live Action"] = 1
-
-        print(self.__animation_dict)
+            self.__animation_dict["Live Action"] = self.__animation_dict.get("Live Action", 0) + 1
 
     def total_time(self):
         return self.__total_time

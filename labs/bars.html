@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .bar-container {
+            --fill-width: 50%; /* Default fill width */
+            width: 100px;
+            height: 30px;
+            background-color: #eee;
+            border: 2pt solid black;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 5px;
+            background-color: #3498db; /* Change color as needed */
+            width: var(--fill-width); /* Use the variable here */
+        }
+
+        .bar-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15px;
+            font-weight: bold;
+            font-family: sans-serif;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bar-container" style="--fill-width: 100%;">
+    <div class="bar-fill"></div>
+    <div class="bar-text">2.5</div>
+</div>
+
+</body>
+</html>

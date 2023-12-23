@@ -40,7 +40,8 @@ def to_simple_movie(entry):
         "tags": entry.tags,
         "runtime": format_duration(entry.runtime),
         "tmdb_id": entry.tmdb_id,
-        "imdb_id": entry.imdb_id
+        "imdb_id": entry.imdb_id,
+        "poster_path": entry.poster_path
     }
 
 

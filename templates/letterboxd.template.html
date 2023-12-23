@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ year }} Movies</title>
+    <link rel="stylesheet" href="style/letterboxd.css"/>
+</head>
+<body>
+<div class="content">
+    <h1 id="main">{{ year }} in Letterboxd movies</h1>
+
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#general_info">General Information</a></li>
+        <li><a href="#time_info">Time Information</a></li>
+        <li><a href="#movies_watched">Movies Watched</a></li>
+        <li>
+            <a href="#graphics">Graphics</a>
+            <ol>
+                {% for graph in graphs %}
+                <li><a href="#{{ graph.id }}">{{ graph.title}}</a></li>
+                {% endfor %}
+            </ol>
+        </li>
+    </ol>
+
+    <h2 id="general_info">General Information</h2>
+    <table>
+        <tr>
+            <th>Movies Watched</th>
+            <th>Rewatches</th>
+            <th>Ratings Average</th>
+        </tr>
+        <tr>
+            <td class="numeric-data"><img src="icons/movie.png"/><code>{{ watched }}</code></td>
+            <td class="numeric-data"><img src="icons/movie.png"/><code>{{ rewatches }}</code></td>
+            <td class="numeric-data"><img src="icons/star.png"/><code>{{ average }}</code></td>
+        </tr>
+    </table>
+
+    <h2 id="time_info">Time Information</h2>
+    <p>{{time_data}}</p>
+    <table>
+        <tr>
+            <th>Total Movie Time</th>
+            <th>Longest Movie</th>
+            <th>Shortest Movie</th>
+            <th>Movie Time Average</th>
+        </tr>
+        <tr>
+            <td class="numeric-data"><img src="icons/clock.png"/><code>{{ total_time }}</code></td>
+            <td class="numeric-data"><img src="icons/movie.png"/><code>{{ longest_movie_name }}<br/><img src="icons/clock.png"/>{{ longest_movie_runtime }}</code></td>
+            <td class="numeric-data"><img src="icons/movie.png"/><code>{{ shortest_movie_name }}<br/><img src="icons/clock.png"/>{{ shortest_movie_runtime }}</code></td>
+            <td class="numeric-data"><img src="icons/clock.png"/><code>{{ average_time }}</code></td>
+        </tr>
+    </table>
+    <a href="#main">Back to top</a>
+
+    <h2 id="movies_watched">Movies Watched</h2>
+    <p></p>
+    <label for="filterMovie">Search a movie</label>
+    <input type="text" id="filterMovie" placeholder="Filter movie...">
+    <p></p>
+    <table id="movieTable">
+        <tr>
+            <th>Watched Date</th>
+            <th>Rating</th>
+            <th>Movie</th>
+            <th>Runtime</th>
+            <th>Tags</th>
+        </tr>
+        {% for movie in movies %}
+        <tr>
+            <td class="numeric-data">{{ movie.watched }}</td>
+            <td class="numeric-data">
+                <div class="bar-container" style="--fill-width: {{ movie.rating / 5.0 }}%;">
+                    <div class="bar-fill"></div>
+                    <div class="bar-text">{{ movie.rating }}</div>
+                </div>
+            </td>
+            <td>
+                {% if movie.rating == 5.0 %}
+                <img src="icons/heart.png"/>
+                {% endif %}<span class="movie-title">{{ movie.name }}</span>{% if movie.poster_path %}<a href="#" class="poster-link" data-poster-url="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"><img src="icons/eye.png" alt="View Poster"></a>{% else %}<a href="#" class="no-poster-link"><img src="icons/blind.png" alt="No Poster"/></a>{% endif %}<br/>
+                [<a href="{{ movie.review_link }}" target="_blank">LetterBoxd</a>]&nbsp;
+                [<a href="http://themoviedb.org/movie/{{ movie.tmdb_id }}" target="_blank">TMDB</a>]&nbsp;
+                [<a href="http://imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a>]
+            </td>
+            <td class="numeric-data">{{ movie.runtime }}</td>
+            <td>
+                {% for tag in movie.tags %}<code class="badge badge-tag">{{ tag }}</code>{% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="#main">Back to top</a>
+
+    <h2 id="graphics">Graphics</h2>
+
+    {% for graph in graphs %}<h3 id="{{ graph.id }}">{{ graph.title }}</h3>
+    <p style="text-align: center">
+        <img src="{{ graph.file }}"/>
+    </p>
+    <a href="#main">Back to top</a>
+    {% endfor %}
+
+    <br/>
+    <h3>About Sources:</h3>
+    <p>A source is a streaming channel like Netflix or Disney+. But there are others that can be present in the
+        values:</p>
+
+    <table>
+        <tr>
+            <th>Source Name</th>
+            <th>Meaning</th>
+        </tr>
+        <tr>
+            <td><code>theater</code></td>
+            <td>The movie has been watched on a Movie Theater</td>
+        </tr>
+        <tr>
+            <td><code>netflix</code></td>
+            <td>The movie has been watched on Netflix</td>
+        </tr>
+        <tr>
+            <td><code>disney+</code></td>
+            <td>The movie has been watched on Disney+</td>
+        </tr>
+        <tr>
+            <td><code>primevideo</code></td>
+            <td>The movie has been watched on Amazon Prime Video</td>
+        </tr>
+        <tr>
+            <td><code>sky</code></td>
+            <td>The movie has been watched on SkyShowtime</td>
+        </tr>
+        <tr>
+            <td><code>hbomax</code></td>
+            <td>The movie has been watched on HBO MAX</td>
+        </tr>
+        <tr>
+            <td><code>mubi</code></td>
+            <td>The movie has been watched on MUBI</td>
+        </tr>
+        <tr>
+            <td><code>rtpplay</code></td>
+            <td>The movie has been watched on RTP Play</td>
+        </tr>
+        <tr>
+            <td><code>alternative</code></td>
+            <td>The movie has been watched in an alternative way</td>
+        </tr>
+        <tr>
+            <td><code>tv</code></td>
+            <td>The movie has been watched on TV</td>
+        </tr>
+        <tr>
+            <td><code>internet</code></td>
+            <td>The movie has been watched on its official website, which is different from YouTube</td>
+        </tr>
+        <tr>
+            <td><code>youtube</code></td>
+            <td>The movie has been watched on YouTube, that could be its official site</td>
+        </tr>
+    </table>
+
+    <h3>About Adaptations:</h3>
+    <p>An adaptation is a movie that the original idea came from another media like books, comics, fairy-tales or
+        another source. Here are some adaptations categories:</p>
+
+    <table>
+        <tr>
+            <th>Adaptation</th>
+            <th>Meaning</th>
+        </tr>
+        <tr>
+            <td><code>game</code></td>
+            <td>The movie has been adapted from a Video Game source material</td>
+        </tr>
+        <tr>
+            <td><code>book</code></td>
+            <td>The movie has been adapted from a Book source material</td>
+        </tr>
+        <tr>
+            <td><code>facts</code></td>
+            <td>The movie has been adapted from Real Facts from newspapers, TV news, radio transmissions or other
+                media
+            </td>
+        </tr>
+        <tr>
+            <td><code>fairy-tale</code></td>
+            <td>The movie has been adapted from a Fairy-Tale source material</td>
+        </tr>
+        <tr>
+            <td><code>comics</code></td>
+            <td>The movie has been adapted from Comic Books or Graphics Novel source materials</td>
+        </tr>
+        <tr>
+            <td><code>play</code></td>
+            <td>The movie has been adapted from a Play source material</td>
+        </tr>
+    </table>
+
+    <p style="text-align:center; font-size: 12px">Developed by <a href="https://github.com/ortolanph">Paulo Ortolan</a>
+    </p>
+</div>
+
+<script src="scripts/letterboxd.js"></script>
+</body>
+</html>

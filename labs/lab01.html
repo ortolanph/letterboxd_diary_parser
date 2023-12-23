@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Posters</title>
+    <link rel="stylesheet" href="lab01.css">
+</head>
+<body>
+
+<ul class="movie-list">
+    <li>
+        <span class="movie-title">Movie 1</span>
+        <a href="#" class="poster-link" data-poster-url="poster1.png">
+            <img src="view.png" alt="View Poster">
+        </a>
+    </li>
+    <li>
+        <span class="movie-title">Movie 2</span>
+        <a href="#" class="poster-link" data-poster-url="poster2.png">
+            <img src="view.png" alt="View Poster">
+        </a>
+    </li>
+    <li>
+        <span class="movie-title">Movie 3</span>
+        <a href="#" class="no-poster-link">
+            <img src="no_poster.png" alt="No Poster">
+        </a>
+    </li>
+    <!-- Add more movies as needed -->
+</ul>
+
+<div id="popup">
+    <img src="" alt="Movie Poster" id="popupPoster">
+    <span id="closeBtn">&times;</span>
+</div>
+
+<script src="lab01.js"></script>
+</body>
+</html>

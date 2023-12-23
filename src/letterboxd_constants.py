@@ -1,6 +1,6 @@
 SOURCE_PATH = "templates"
 TARGET_PATH = "target"
-TEMPLATE_FILE = "letterboxd.template"
+TEMPLATE_FILE = "letterboxd.template.html"
 TARGET_FILE = "letterboxd.html"
 STYLE_FILE = "letterboxd.css"
 CONFIG_FILE = "config.yml"
