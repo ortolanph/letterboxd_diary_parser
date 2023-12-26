@@ -35,6 +35,7 @@ def to_simple_movie(entry):
     return {
         "name": entry.name,
         "rating": entry.rating,
+        "rating_percent": f"{(entry.rating / 5.0) * 100}%",
         "watched": entry.watched_date.strftime('%Y-%m-%d'),
         "review_link": entry.uri,
         "tags": entry.tags,
