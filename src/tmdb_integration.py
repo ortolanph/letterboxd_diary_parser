@@ -20,6 +20,11 @@ class TMDBIntegration:
         parameters = {"language": "en-US"}
         return self._execute_url(url, parameters)
 
+    def get_show_data(self, show_id, season):
+        url = f"tv/{show_id}/season/{season}"
+        parameters = {"language": "en-US"}
+        return self._execute_url(url, parameters)
+
     def _execute_url(self, url, parameters=None):
         if parameters is None:
             parameters = {}
