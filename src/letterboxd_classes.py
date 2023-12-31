@@ -3,7 +3,7 @@ import datetime
 
 from src.config_manager import ConfigManager
 from src.letterboxd_aggregators import same_watched_month
-from src.letterboxd_utils import parse_date, parse_tags, is_rewatch, to_month_transformer, to_simple_movie
+from src.letterboxd_utils import parse_date, parse_tags, is_rewatch, to_month_transformer, to_simple_movie, collect_tags
 from src.tmdb_integration import TMDBIntegration
 
 
@@ -89,7 +89,13 @@ class LetterBoxdDiaryStatistics:
                     my_diary_entry.tags = parse_tags(row["Tags"])
                     my_diary_entry.rewatch = is_rewatch(row["Rewatch"])
                     my_diary_entry.watched_date = parse_date(row["Watched Date"])
-                    my_diary_entry.tmdb_id = int(row["TMDB ID"])
+
+                    collected_tags = collect_tags(my_diary_entry.tags)
+
+                    if row["TMDB ID"] != "":
+                        my_diary_entry.tmdb_id = int(row["TMDB ID"])
+                    else:
+                        my_diary_entry.tmdb_id = int(collected_tags["tmdb_id"])
 
                     print(" - Fetching other data on TMDB")
                     if my_diary_entry.tmdb_id > -1:
@@ -162,8 +168,8 @@ class LetterBoxdDiaryStatistics:
         return result_dict
 
     def __populate_animations_dict(self, tags):
-        if " style:animation" in tags:
-            self.__animation_dict["Live Action"] = self.__animation_dict.get("Animation", 0) + 1
+        if "style:animation" in tags:
+            self.__animation_dict["Animation"] = self.__animation_dict.get("Animation", 0) + 1
         else:
             self.__animation_dict["Live Action"] = self.__animation_dict.get("Live Action", 0) + 1
 

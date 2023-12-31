@@ -8,7 +8,16 @@ def parse_date(my_date):
 
 
 def parse_tags(my_tags):
-    return my_tags.replace('"', '').strip().split(",")
+    return (my_tags
+            .replace('"', '')
+            .replace(' ', '')
+            .strip()
+            .split(","))
+
+
+def collect_tags(my_parsed_tags):
+    # ERROR when there are multiple values with the same key
+    return dict([(tag.split(":")[0], tag.split(":")[1]) for tag in my_parsed_tags if tag.strip()])
 
 
 def is_rewatch(rewatch_flag):
