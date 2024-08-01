@@ -33,12 +33,13 @@ jobs:
           subject: "PR Notification: ${{ env.PR_TITLE }}"
           to: ${{ secrets.EMAIL_TO }}
           from: ${{ secrets.EMAIL_FROM }}
-          content_type: text/html
-          body: |
+          html_body: |
             <h3>New Pull Request Created</h3>
-            <p><strong>Title:</strong> ${{ env.PR_TITLE }}</p>
-            <p><strong>Body:</strong> ${{ env.PR_BODY }}</p>
-            <p><strong>URL:</strong> <a href="${{ env.PR_URL }}">Link to PR</a></p>
+            <p><strong>Title:</strong>${{ env.PR_TITLE }}</p>
+            <p></p>
+            <p><strong>Description:</strong>${{ env.PR_BODY }}</p>
+            <p></p>
+            <p><strong>URL:</strong><a href="${{ env.PR_URL }}">Link to PR</a></p>
 
       - name: Debug
         run: |
