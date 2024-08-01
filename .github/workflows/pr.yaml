@@ -2,46 +2,46 @@ name: Notify via Email on PR
 
 on:
   pull_request:
-    types: [opened, edited, reopened]
+    types: [ opened, edited, reopened ]
 
 jobs:
-  notify:
+  notify_pr:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
-      uses: actions/checkout@v2
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-    - name: Extract PR information
-      id: extract_pr_info
-      run: |
-        PR_TITLE=$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)
-        PR_BODY=$(jq -r '.pull_request.body' $GITHUB_EVENT_PATH)
-        PR_URL=$(jq -r '.pull_request.html_url' $GITHUB_EVENT_PATH)
-        echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
-        echo "PR_BODY=$PR_BODY" >> $GITHUB_ENV
-        echo "PR_URL=$PR_URL" >> $GITHUB_ENV
+      - name: Extract PR information
+        id: extract_pr_info
+        run: |
+          PR_TITLE=$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)
+          PR_BODY=$(jq -r '.pull_request.body' $GITHUB_EVENT_PATH)
+          PR_URL=$(jq -r '.pull_request.html_url' $GITHUB_EVENT_PATH)
+          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
+          echo "PR_BODY=$PR_BODY" >> $GITHUB_ENV
+          echo "PR_URL=$PR_URL" >> $GITHUB_ENV
 
-    - name: Send email
-      id: send_email
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: ${{ secrets.SMTP_SERVER }}
-        server_port: ${{ secrets.SMTP_PORT }}
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
-        subject: "PR Notification: ${{ env.PR_TITLE }}"
-        to: ${{ secrets.EMAIL_TO }}
-        from: ${{ secrets.EMAIL_FROM }}
-        content_type: text/html
-        body: |
-          <h3>New Pull Request Created</h3>
-          <p><strong>Title:</strong> ${{ env.PR_TITLE }}</p>
-          <p><strong>Body:</strong> ${{ env.PR_BODY }}</p>
-          <p><strong>URL:</strong> <a href="${{ env.PR_URL }}">Link to PR</a></p>
+      - name: Send email
+        id: send_email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "PR Notification: ${{ env.PR_TITLE }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: ${{ secrets.EMAIL_FROM }}
+          content_type: text/html
+          body: |
+            <h3>New Pull Request Created</h3>
+            <p><strong>Title:</strong> ${{ env.PR_TITLE }}</p>
+            <p><strong>Body:</strong> ${{ env.PR_BODY }}</p>
+            <p><strong>URL:</strong> <a href="${{ env.PR_URL }}">Link to PR</a></p>
 
-    - name: Debug
-      run: |
-        echo "PR_TITLE=${{ env.PR_TITLE }}"
-        echo "PR_BODY=${{ env.PR_BODY }}"
-        echo "PR_URL=${{ env.PR_URL }}"
+      - name: Debug
+        run: |
+          echo "PR_TITLE=${{ env.PR_TITLE }}"
+          echo "PR_BODY=${{ env.PR_BODY }}"
+          echo "PR_URL=${{ env.PR_URL }}"
