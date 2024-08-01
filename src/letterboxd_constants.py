@@ -43,5 +43,6 @@ TEMPLATE_GRAPH_DATA = [
     {"id": "graphics_most_watched_genres", "title": "Most Watched Genres", "file": "watched_genres.png"},
     {"id": "graphics_most_watched_sources", "title": "Most Watched Sources", "file": "watched_sources.png"},
     {"id": "graphics_most_watched_adaptations", "title": "Most Watched Adaptations", "file": "watched_adaptations.png"},
-    {"id": "graphics_animation_vs_live_action", "title": "Animation vs Live Action Movies", "file": "animation_live_action.png"},
+    {"id": "graphics_animation_vs_live_action", "title": "Animation vs Live Action Movies",
+     "file": "animation_live_action.png"},
 ]
