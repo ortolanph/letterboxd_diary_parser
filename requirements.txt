@@ -1,5 +1,4 @@
 jinja2
-numpy
-matplotlib
+numpy==2.0.1
+matplotlib==3.9.1
 pytest-shutil
-yaml
