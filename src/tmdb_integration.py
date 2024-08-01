@@ -28,7 +28,6 @@ class TMDBIntegration:
     def tv_show_ratings(self, page=1):
         url = f"account/{self._configuration['account_id']}/rated/tv"
         parameters = {"page": page, "language": "en-US"}
-
         return self._execute_url(url, parameters)
 
     def _execute_url(self, url, parameters=None):
