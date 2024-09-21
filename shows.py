@@ -5,8 +5,15 @@ from src.letterboxd_utils import format_duration
 from src.tmdb_integration import TMDBIntegration
 
 
+def runtime_is_not_none(runtime):
+    if runtime is not None:
+        return int(runtime)
+    else:
+        return 0
+
+
 def get_episodes_duration_sum(episodes):
-    all_runtimes = list(int(episode['runtime']) for episode in episodes)
+    all_runtimes = list(runtime_is_not_none(episode['runtime']) for episode in episodes)
     return sum(all_runtimes)
 
 
@@ -42,7 +49,7 @@ def main(year):
 
     print(f"All the shows watched on {year} has a total of {format_duration(total_shows_duration_sum)}")
 
-    page = 2
+    page = 1
 
     ratings_response = tmdb_client.tv_show_ratings()
     all_show_ratings = get_shows_ratings(ratings_response["results"])
@@ -51,7 +58,7 @@ def main(year):
 
     while page <= total_pages:
         ratings_response = tmdb_client.tv_show_ratings(page)
-        all_show_ratings.update(get_shows_ratings(ratings_response[ratings_response["results"]]))
+        all_show_ratings.update(get_shows_ratings(ratings_response["results"]))
         page += 1
 
     print(all_show_ratings)
