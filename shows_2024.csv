@@ -1,26 +1,26 @@
-TV_Show,Season,Source,TMDB_ID
-Echo,1,Disney+,122226
-3 Body Problem,1,Netflix,108545
-Fallout,1,Amazon Prime Video,106379
-Baby Reindeer,1,Netflix,241259
-Star Wars:Tales of the Empire,1,Disney+,251091
-X-Men'97,1,Disney+,138502
-Sweet Tooth,2,Netflix,103768
-Sweet Tooth,3,Netflix,103768
-The Acolyte,1,Disney+,114479
-Batman: Caped Crusader,1,Amazon Prime Video,125909
-The Decameron,1,Netflix,250162
-Knuckles,1,SkyShowtime,158300
-Futurama Season 12,9,Disney+,615
-Terminator Zero,1,Netflix,239287
-The Lord of the Rings: The Rings of Power,2,Amazon Prime Video,84773
-Agatha All Along,1,Disney+,138501
-Uzumaki,1,MAX,93241
-The Penguin,1,MAX,194764
-BrickToons,1,Disney +,262153
-Marvel's Hit-Monkey,2,Disney +,133903
-Hot Wheels Let's Race,1,Netflix,235995
-Hot Wheels Let's Race,2,Netflix,235995
-Astronauta,1,Max,215580
-Shatter Belt,1,FILMIN,222028
-The Simpsons,35,Disney+,456
+show,season,source,tmdb_id,kind
+Echo,1,Disney+,122226,limited
+3 Body Problem,1,Netflix,108545,regular
+Fallout,1,Amazon Prime Video,106379,regular
+Baby Reindeer,1,Netflix,241259,limited
+Star Wars:Tales of the Empire,1,Disney+,251091,limited
+X-Men'97,1,Disney+,138502,regular
+Sweet Tooth,2,Netflix,103768,regular
+Sweet Tooth,3,Netflix,103768,regular
+The Acolyte,1,Disney+,114479,limited
+Batman: Caped Crusader,1,Amazon Prime Video,125909,regular
+The Decameron,1,Netflix,250162,limited
+Knuckles,1,SkyShowtime,158300,regular
+Futurama Season 12,9,Disney+,615,regular
+Terminator Zero,1,Netflix,239287,limited
+The Lord of the Rings: The Rings of Power,2,Amazon Prime Video,84773,regular
+Agatha All Along,1,Disney+,138501,limited
+Uzumaki,1,MAX,93241,limited
+The Penguin,1,MAX,194764,limited
+BrickToons,1,Disney +,262153,regular
+Marvel's Hit-Monkey,2,Disney +,133903,regular
+Hot Wheels Let's Race,1,Netflix,235995,regular
+Hot Wheels Let's Race,2,Netflix,235995,regular
+Astronauta,1,Max,215580,limited
+Shatter Belt,1,FILMIN,222028,limited
+The Simpsons,35,Disney+,456,regular
