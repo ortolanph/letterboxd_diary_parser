@@ -1,0 +1,44 @@
+Statistics:
+    Movies Section:
+	General Information:
+	        Movies Watched: int / 100
+        	Rewatches: int / 1
+	        Ratings Average: float / 4.25
+
+	Time Information:
+        	Total Movie Time: String / 5 days, 17:40:00
+	        Longest Movie: String\nString / The Lonest Movie\n4:00:00
+        	Shortest Movie: String\nString / The Lonest Movie\n0:10:00
+	        Movie Time Average: String / 2:05:00
+
+    Shows Section:
+	General Information:
+	        Longest Show: String(int)\nString\nString / The Longest TV Show (30 episodes)\Season X\16:00
+        	Smallest Show: String(int)\nString\nString / The Smallest TV Show (3 episodes)\Season Y\1:30
+		Total Time in Shows: String / 8 days, 22:00
+
+	Ratings:
+		Most Rated: String\nString\int / The Coolest Show\Season K\5.0
+		Least Rated: String\nString\int / The Stinky Show\Season W\5.0
+		Average Rating: float: 3.5
+
+{
+	"movies": {
+		"movieList": [],
+		"statistics": {
+			"general": {
+				"watched": 2000,
+				"rewatches": 2,
+				"average": 4.5
+			}
+		},
+		"graphs": {},
+	}
+}
+
+Watched TV Shows:
+	TV Show
+	Season
+	Rating
+	Total Time
+	Total Episode Average Time

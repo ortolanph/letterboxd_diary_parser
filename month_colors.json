@@ -1,0 +1,14 @@
+{
+  "JAN": "red-violet",
+  "FEB": "violet",
+  "MAR": "blue-violet",
+  "APR": "blue",
+  "MAY": "blue-green",
+  "JUN": "green",
+  "JUL": "yellow-green",
+  "AUG": "yellow",
+  "SEP": "yellow-orange",
+  "OCT": "orange",
+  "NOV": "red-orange",
+  "DEC": "red"
+}
